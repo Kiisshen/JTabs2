@@ -1,0 +1,55 @@
+#root {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.startPage {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    background-color: #e3e5ff;
+    height: 100vh;
+    place-content: center;
+}
+
+.startPage h1 {
+    color: #646cff;
+}
+
+.startPage p {
+    color: #646cff;
+}
+
+.startPage button {
+    font-size: 0.75vw;
+    width: 6vw;
+    height: 2vw;
+    border-radius: 2vw;
+    border: 2px solid #646cff;
+    background-color: #e3e5ff;
+    color: #646cff;
+    margin-bottom: 2vw;
+}
+
+.startPage button:hover {
+    border: 2px solid #e3e5ff;
+    background-color: #646cff;
+    color: #e3e5ff;
+}
+
+.startPage form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.startPage .fileUpload {
+    padding: 1vw;
+    color: #646cff;
+    border: 2px solid #646cff;
+    border-radius: 0.4vw;
+    margin-bottom: 2vw;
+}
