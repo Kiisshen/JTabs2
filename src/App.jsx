@@ -10,7 +10,7 @@ function App() {
   const [loadedTabs, setLoadedTabs] = useState([]);
   const [fileName, setFileName] = useState("default_tab")
   const [viewMode, setViewMode] = useState(false)
-  const [fillTabs, setFillTabs] = useState(null)
+  const [fillTabs, setFillTabs] = useState([])
 
   useEffect(() => {
       const storedTabs = localStorage.getItem('loadedTabs');
@@ -86,7 +86,8 @@ function App() {
     setTabs((prevTabs) => {
       return prevTabs.filter((tab) => tab.id !== id);
     });
-    fillTabs[index] = [];
+    if(fillTabs.length > 0)
+      fillTabs[index] = [];
   };
 
   const saveNotes = () => {
@@ -119,13 +120,17 @@ function App() {
   };
 
   function handleChange(e, index, i, j){
-    fillTabs[index][i][j] = e.target.value;
-    e.target.placeholder = e.target.value;
+    if(fillTabs.length > 0){
+      fillTabs[index][i][j] = e.target.value;
+      e.target.placeholder = e.target.value;
+    }
   }
 
   function handleKeyDown(e){
-    if(e.target.placeholder != null){
-      e.target.value = e.target.placeholder
+    if(fillTabs.length > 0){
+      if(e.target.placeholder != null){
+        e.target.value = e.target.placeholder
+      }
     }
   }
 
