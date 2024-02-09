@@ -10,6 +10,7 @@ function App() {
   const [loadedTabs, setLoadedTabs] = useState([]);
   const [fileName, setFileName] = useState("default_tab")
   const [viewMode, setViewMode] = useState(false)
+  const [fillTabs, setFillTabs] = useState(null)
 
   useEffect(() => {
       const storedTabs = localStorage.getItem('loadedTabs');
@@ -22,15 +23,14 @@ function App() {
   useEffect(() => {
     if (loadedTabs.length > 0) {
       loadTabs();
+      setFillTabs(loadedTabs);
     }
   }, [loadedTabs]);
 
   useEffect(() => {
-    console.log(tabs);
   }, [tabs]);
 
   useEffect(() => {
-    console.log("id:" + tabID)
   }), [tabID]
 
   function loadTabs(){
@@ -82,10 +82,11 @@ function App() {
     });
   }
 
-  const deleteTab = (id) => {
+  const deleteTab = (id, index) => {
     setTabs((prevTabs) => {
       return prevTabs.filter((tab) => tab.id !== id);
     });
+    fillTabs[index] = [];
   };
 
   const saveNotes = () => {
@@ -117,6 +118,17 @@ function App() {
     saveAs(blob, fileName);
   };
 
+  function handleChange(e, index, i, j){
+    fillTabs[index][i][j] = e.target.value;
+    e.target.placeholder = e.target.value;
+  }
+
+  function handleKeyDown(e){
+    if(e.target.placeholder != null){
+      e.target.value = e.target.placeholder
+    }
+  }
+
   return (
     <>
       <div className='app'>
@@ -146,7 +158,7 @@ function App() {
                   <div key={tab.id} className='tab' ref={(ref) => (tabRefs.current[tab.id] = ref)}>
                     {!viewMode && (
                       <>
-                        <button className='deleteTab' onClick={() => deleteTab(tab.id)}>X</button>
+                        <button className='deleteTab' onClick={() => deleteTab(tab.id, index)}>X</button>
                         <button className='addTab' onClick={() => addItem(tab.id)}>+</button>
                       </>
                     )}
@@ -164,10 +176,12 @@ function App() {
                             key={j}
                             className={viewMode ? 'hiddenBorders' : 'visibleBorders'}
                             placeholder={
-                              loadedTabs[index] && loadedTabs[index][i] && loadedTabs[index][i][j]
-                                ? loadedTabs[index][i][j]
+                              fillTabs[index] && fillTabs[index][i] && fillTabs[index][i][j]
+                                ? fillTabs[index][i][j]
                                 : ""
                             }
+                            onKeyDown={(e) => handleKeyDown(e)}
+                            onChange={(e) => handleChange(e, index, i, j)}
                           />
                           ))}
                       </div>
