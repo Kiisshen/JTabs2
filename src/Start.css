@@ -23,14 +23,14 @@
 }
 
 .startPage button {
-    font-size: 0.75vw;
-    width: 6vw;
-    height: 2vw;
-    border-radius: 2vw;
+    font-size: 1.2vh;
+    width: 12vh;
+    height: 4vh;
+    border-radius: 2vh;
     border: 2px solid #646cff;
     background-color: #e3e5ff;
     color: #646cff;
-    margin-bottom: 2vw;
+    margin-bottom: 2vh;
 }
 
 .startPage button:hover {
@@ -47,9 +47,9 @@
 }
 
 .startPage .fileUpload {
-    padding: 1vw;
+    padding: 1vh;
     color: #646cff;
     border: 2px solid #646cff;
     border-radius: 0.4vw;
-    margin-bottom: 2vw;
+    margin-bottom: 2.5vh;
 }

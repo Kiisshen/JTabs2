@@ -124,6 +124,12 @@ function App() {
       fillTabs[index][i][j] = e.target.value;
       e.target.placeholder = e.target.value;
     }
+    if(e.target.value != ""){
+      e.target.id = "hasInput"
+    }
+    else {
+      e.target.id = ""
+    }
   }
 
   function handleKeyDown(e){
@@ -132,6 +138,10 @@ function App() {
         e.target.value = e.target.placeholder
       }
     }
+  }
+
+  function handlePlaceHolders(index, i, j){
+    return
   }
 
   return (
@@ -163,8 +173,8 @@ function App() {
                   <div key={tab.id} className='tab' ref={(ref) => (tabRefs.current[tab.id] = ref)}>
                     {!viewMode && (
                       <>
-                        <button className='deleteTab' onClick={() => deleteTab(tab.id, index)}>X</button>
-                        <button className='addTab' onClick={() => addItem(tab.id)}>+</button>
+                        <button className='deleteTab' onClick={() => deleteTab(tab.id, index)}><p>X</p></button>
+                        <button className='addTab' onClick={() => addItem(tab.id)}><p>+</p></button>
                       </>
                     )}
                     <div className='start'></div>
@@ -185,6 +195,7 @@ function App() {
                                 ? fillTabs[index][i][j]
                                 : ""
                             }
+                            id={fillTabs[index] && fillTabs[index][i] && fillTabs[index][i][j] && fillTabs[index][i][j] != "" ? 'hasInput' : ''}
                             onKeyDown={(e) => handleKeyDown(e)}
                             onChange={(e) => handleChange(e, index, i, j)}
                           />
